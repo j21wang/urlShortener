@@ -1,6 +1,10 @@
 import sys
 import urllib
+import urllib2
 import urlparse
+import requests
+import hashlib
+import string
 
 def isValidURL(url):
 
@@ -13,12 +17,26 @@ def isValidURL(url):
 def getLongURL(url):
     return urllib.urlencode({"longurl": url})
 
+def hashURL(netloc):
+    hashedURL = hashlib.md5()
+    hashedURL.update(netloc)
+    return str(hashedURL.hexdigest()[:5])
+
+def appendDomainName(hashedOutput):
+    domain = 'jwang.com/'
+    shortenedLink = domain + (str(hashedOutput))
+    print shortenedLink
+
 def main():
 
-    url = str(sys.argv[1]);
-    if isValidURL(url) == -1:
+    s = requests.session()
+    url = str(sys.argv[1])
+    validURL = isValidURL(url)
+    if validURL == -1:
         return
-    longURL = getLongURL(url);
-    print longURL
+    validURL = validURL.netloc.replace("www.","")
+    hashedOutput = hashURL(validURL)
+    appendDomainName(hashedOutput)
+    print s
 
 main()
