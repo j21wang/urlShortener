@@ -36,7 +36,7 @@ def main():
     url = str(sys.argv[1])
 
     if re.match('(https?://)?jwang.com',url):
-        print 'check backwards';
+        print 'check backwards!';
 
     result = shorten_url(url)
 
