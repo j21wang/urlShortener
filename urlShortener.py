@@ -1,7 +1,6 @@
 import sys
 import hashlib
 import re
-
 def prepend_http(url):
     if not url.startswith(('http://','https://')):
         url = 'http://' + url
