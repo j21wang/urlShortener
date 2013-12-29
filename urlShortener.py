@@ -14,15 +14,15 @@ def is_valid_url(url):
     return re.match('https?://.+\..+',url)
 
 def encode(url):
+    print url
     chars = "\/\.0123456789abcdefghijklmnopqrstuvwxyz"
     alnum_url = url.lower()
     alnum_url = re.sub("^https?://","",alnum_url)
     
     short_url = ""
     for char in alnum_url:
-        remainder_arr = []
         num = chars.find(char)
-        num = num + 5 # 5 was chosen for funsies
+        num = num + 1 # 5 was chosen for funsies
         short_url = short_url + chars[num]
 
     return short_url
@@ -60,6 +60,7 @@ def main():
         return
         
     url = str(sys.argv[1])
+    print url
 
     if re.match('(https?://)?jwang.com/.+',url):
         decode(url)
